@@ -66,7 +66,7 @@ def satellite6_capsule_setup(sat_host, os_version, upgradable_capsule=True):
     copy_ssh_key(sat_host, cap_hosts)
     # Dont run capsule upgrade requirements for n-1 capsule
     if upgradable_capsule:
-        execute(sync_capsule_repos_to_upgrade, cap_hosts, host=sat_host)
+        #execute(sync_capsule_repos_to_upgrade, cap_hosts, host=sat_host)
         for cap_host in cap_hosts:
             logger.info('Capsule {} is ready for Upgrade'.format(cap_host))
     return cap_hosts
