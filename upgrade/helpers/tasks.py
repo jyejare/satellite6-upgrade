@@ -151,11 +151,11 @@ def sync_capsule_repos_to_upgrade(capsules):
             hammer_repository_set_enable(
                 repo_name, product_name, '1', 'x86_64')
             repo_name = repo_name.replace('(', '').replace(')', '') + ' x86_64'
-        hammer_repository_synchronize(repo_name, '1', product_name)
+        print hammer_repository_synchronize(repo_name, '1', product_name)
         # Add repos to CV
         hammer_content_view_add_repository(
             cv_name, '1', product_name, repo_name)
-        hammer_content_view_publish(cv_name, '1')
+        print hammer_content_view_publish(cv_name, '1')
         # Promote cv
         lc_env_id = get_attribute_value(
             hammer('lifecycle-environment list --organization-id 1 '
@@ -167,11 +167,11 @@ def sync_capsule_repos_to_upgrade(capsules):
             '{} '.format(cv_name))[1]) for data in cv_version_data]).pop()
         cv_ver_id = get_attribute_value(cv_version_data, '{0} {1}'.format(
             cv_name, latest_cv_ver), 'id')
-        hammer_content_view_promote_version(
+        print hammer_content_view_promote_version(
             cv_name, cv_ver_id, lc_env_id, '1',
             False if from_version == '6.0' else True)
         if capsule_repo:
-            hammer_activation_key_add_subscription(
+            print hammer_activation_key_add_subscription(
                 activation_key, '1', product_name)
         else:
             label = 'rhel-{0}-server-satellite-capsule-{1}-rpms'.format(
