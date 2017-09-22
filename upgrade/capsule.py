@@ -38,6 +38,10 @@ def satellite6_capsule_setup(sat_host, os_version, upgradable_capsule=True):
     # For User Defined Capsule
     if os.environ.get('CAPSULE_HOSTNAMES'):
         cap_hosts = os.environ.get('CAPSULE_HOSTNAMES')
+        if ',' in cap_hosts:
+            cap_hosts = [cap.strip() for cap in cap_hosts.split(',')]
+        else:
+            cap_hosts = [cap_hosts]
         if not os.environ.get('CAPSULE_AK'):
             logger.warning('CAPSULE_AK environment variable is not defined !')
             sys.exit(1)
