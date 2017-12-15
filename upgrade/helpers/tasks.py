@@ -256,6 +256,11 @@ def sync_tools_repos_to_upgrade(client_os, hosts):
     hammer_content_view_add_repository(cv_name, '1', tools_product, tools_repo)
     hammer_content_view_publish(cv_name, '1')
     # Promote cv
+    # Debug Step
+    print "THE L. ENVIRONMENT is: ", env_name
+    abc= hammer('lifecycle-environment list --organization-id 1 --name {}'.format(env_name))
+    print "THE LC list is: {}".format(abc)
+    print "THE type of above data is : ", type(abc)
     lc_env_id = get_attribute_value(
         hammer('lifecycle-environment list --organization-id 1 '
                '--name {}'.format(env_name)), env_name, 'id')
